@@ -64,7 +64,7 @@ default_args = {
 
 # [START instantiate_dag]
 with DAG(
-    'my_dag',
+    'my_dag_test',
     default_args=default_args,
     description='A simple tutorial DAG',
     schedule_interval=timedelta(days=1),
