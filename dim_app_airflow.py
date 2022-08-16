@@ -16,7 +16,7 @@ from airflow import DAG
 from datetime import datetime,date, timedelta
 from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.python_operator import PythonOperator
-
+default_args = {"owner": "Etmam"}
 
 #from datetime import datetime, time ,timedelta
 url = 'https://etmam-services.housing.gov.sa/user/dim-applications'
