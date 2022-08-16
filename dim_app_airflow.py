@@ -32,10 +32,10 @@ db = mysql.connect(
 
 def save_values_entity(application_id ,**kwargs):
             today = date.today()- timedelta(days=1)
-            get_data_after_clean = account_id.split("_")
+            get_data_after_clean = application_id.split("_")
             ti = kwargs['ti']
             VIEW_ID = ti.xcom_pull(task_ids="DimAppData_"+str(today))
-            data = ti.xcom_pull(task_ids='get_dim_app_'+account_id)
+            data = ti.xcom_pull(task_ids='get_dim_app_'+application_id)
             print("_____Check_XCOM_VIEW______");
             print(VIEW_ID);
             print("_____Check_XCOM_DATA_____");
