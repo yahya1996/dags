@@ -101,7 +101,6 @@ with DAG(
         get_dim_app = PythonOperator(
             task_id='get_dim_app_'+application_id_data,
             python_callable=get_values_entity,
-            provide_context=True,
             op_kwargs={'application_id': application_id_data },
             dag=dag,
         )
@@ -110,7 +109,6 @@ with DAG(
         save_dim_app = PythonOperator(
                 task_id='save_dim_app_'+application_id_data,
                 python_callable=save_values_entity,
-                provide_context=True,
                 op_kwargs={'application_id': application_id_data },
                 dag=dag,
         )
