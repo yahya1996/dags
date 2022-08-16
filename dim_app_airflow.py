@@ -42,7 +42,7 @@ def save_values_entity(application_id ,**kwargs):
 
 
 
-def get_values_entity(argv,**kwargs):
+def get_values_entity(application_id,**kwargs):
     ti = kwargs['ti']
     data = requests.get(url)
     return data.json()
