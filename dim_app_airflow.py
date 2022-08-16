@@ -57,6 +57,11 @@ def all_dim_app_data(options_All_data , **kwargs):
     print(options_All_data)
     return options_All_data
 
+args = {
+    'owner': 'Etmam',
+    'provide_context': True
+}
+
 with DAG(
     dag_id='dim_applications',
     default_args=args,
