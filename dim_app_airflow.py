@@ -14,8 +14,6 @@ import urllib
 import mysql.connector as mysql
 from airflow import DAG
 from datetime import datetime,date, timedelta
-from apiclient.discovery import build
-from oauth2client.service_account import ServiceAccountCredentials
 from airflow.operators import DummyOperator
 from airflow.operators.python_operator import PythonOperator
 
