@@ -84,6 +84,9 @@ with DAG(
         task_id='start',
     )
 
+    end = DummyOperator(
+        task_id='end')
+
     DimAppData = PythonOperator(
             task_id='DimAppData_'+today,
             python_callable=all_dim_app_data,
@@ -91,10 +94,6 @@ with DAG(
             op_kwargs={'options_All_data': options_All_data },
 
         )
-    start >> DimAppData
-
-    end = DummyOperator(
-        task_id='end')
 
     for application_id_data in application_id:
 
@@ -115,4 +114,4 @@ with DAG(
 
 
         ##task tree (perfom) and dependacy
-        start >> get_dim_app >> save_dim_app >> end
+        start >> DimAppData >> get_dim_app >> save_dim_app >> end
