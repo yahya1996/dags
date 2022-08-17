@@ -76,7 +76,7 @@ with DAG(
 
     for dim_applications in get_Api_data_ids():
             options_All_data.append(dim_applications)
-            application_id.append(dim_applications['application_id']+"_"+today+"_"+str(count))
+            application_id.append(dim_applications['nid']+"_"+today+"_"+str(count))
             count+=1
 
 
