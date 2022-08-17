@@ -45,7 +45,7 @@ def save_values_entity(application_id ,**kwargs):
                     print("_____Check_XCOM_VIEW______");
                     print(VIEW_ID);
                     print("_____Check_XCOM_data_views_____");
-                    print(data_views[0]);
+                    print(data_views['nid']);
 
 
 
