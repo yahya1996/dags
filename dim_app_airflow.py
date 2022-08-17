@@ -23,19 +23,14 @@ today = date.today()- timedelta(days=1)
 url = 'https://etmam-services.housing.gov.sa/user/dim-applications?date='+str(today)
 
 try:
-  connection = psycopg2.connect(
-      user = "root",
-      password = "Gtj#pC*QDwx[8rNt",
-      host = "localhost",
-      port = 3306,
-      database = "etmam_dw_db"
-  )
-  cursor = connection.cursor()
-  print(connection.get_dsn_parameters(),"\n")
-  cursor.execute("SELECT version();")
-  record = cursor.fetchone()
-except(Exception, psycopg2.Error) as error:
-  print("Error connecting to PostgreSQL database", error)
+db = mysql.connect(
+  host="localhost",
+  user="root",
+  password="Gtj#pC*QDwx[8rNt",
+  port = 3306,
+  database='etmam_dw_db' #DB Name
+)
+cursor = db.cursor()
 
 
 def save_values_entity(application_id ,**kwargs):
@@ -74,7 +69,7 @@ def save_values_entity(application_id ,**kwargs):
                    pg_insert = "INSERT INTO dim_applications (application_id, application_number, service_name,company_name,project_title,land_area_m2,project_type,region,city,branch,developer_id,post_date,duration_days,approve_reject_flag,is_overdue_incomplete,current_comment)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
                    val = (application_id, nid,service_type, company_name, project_name,area_m2,project_type,region,city,branch,user_id,create_date,days,state,is_overdue_incomplete,current_comment)
                    cursor.execute(pg_insert, val)
-                   connection.commit()
+                   db.commit()
 
 
 
