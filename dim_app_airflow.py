@@ -47,7 +47,8 @@ def save_values_entity(application_id ,**kwargs):
              if(data_views['nid'] == application_id):
                    print("_____Check_XCOM_data_views_____");
                    print(data_views);
-                   application_id = data_views['application_id']
+                   application_id_full = data_views['application_id']
+                   nid = data_views['nid']
                    service_type = 'test_airflow'
                    company_name = data_views['company_name']
                    project_name = data_views['project_name']
@@ -64,8 +65,8 @@ def save_values_entity(application_id ,**kwargs):
                    is_overdue_incomplete = data_views['is_overdue_incomplete']
 
                    #insert Data
-                   pg_insert = "INSERT INTO dim_applications (application_id, application_number, service_name,company_name,project_title,land_area_m2,project_type,region,city,branch,developer_id,post_date,duration_days,approve_reject_flag,is_overdue_incomplete,current_comment)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-                   val = (application_id, nid,service_type, company_name, project_name,area_m2,project_type,region,city,branch,user_id,create_date,days,state,is_overdue_incomplete,current_comment)
+                   pg_insert = "INSERT INTO dim_applications (application_id,application_number, service_name,company_name,project_title,land_area_m2,project_type,region,city,branch,developer_id,post_date,duration_days,approve_reject_flag,is_overdue_incomplete,current_comment)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                   val = (application_id_full, nid,service_type, company_name, project_name,area_m2,project_type,region,city,branch,user_id,create_date,days,state,is_overdue_incomplete,current_comment)
                    cursor.execute(pg_insert, val)
                    db.commit()
 
