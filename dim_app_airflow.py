@@ -45,7 +45,6 @@ def save_values_entity(application_id ,**kwargs):
             print(application_id);
             for data_views in VIEW_ID:
              if(data_views['nid'] == application_id):
-                   cursor = connection.cursor()
                    print("_____Check_XCOM_data_views_____");
                    print(data_views);
                    application_id = data_views['application_id']
@@ -97,7 +96,7 @@ args = {
 with DAG(
     dag_id='dim_applications',
     default_args=args,
-    start_date=datetime(2022, 8, 14),
+    start_date=datetime(2022, 8, 16),
     schedule_interval="@daily",
     tags=['Dim applications'],
 ) as dag:
