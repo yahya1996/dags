@@ -22,32 +22,59 @@ default_args = {"owner": "Etmam"}
 today = date.today()- timedelta(days=1)
 url = 'https://etmam-services.housing.gov.sa/user/dim-applications?date='+str(today)
 
-db = mysql.connect(
-  host="localhost",
-  user="root",
-  password="Gtj#pC*QDwx[8rNt",
-  port = 3306,
-  database='etmam_dw_db' #DB Name
-)
+try:
+  connection = psycopg2.connect(
+      user = "root",
+      password = "Gtj#pC*QDwx[8rNt",
+      host = "localhost",
+      port = 3306,
+      database = "etmam_dw_db"
+  )
+  cursor = connection.cursor()
+  print(connection.get_dsn_parameters(),"\n")
+  cursor.execute("SELECT version();")
+  record = cursor.fetchone()
+except(Exception, psycopg2.Error) as error:
+  print("Error connecting to PostgreSQL database", error)
+
 
 def save_values_entity(application_id ,**kwargs):
             today = date.today()- timedelta(days=1)
             print("____________today____________")
             print(today)
-
             get_data_after_clean = application_id.split("_")
-            print("_____application_id_____");
-            print(application_id);
-            print("_____get_data_after_clean_____");
-            print(get_data_after_clean);
             ti = kwargs['ti']
             VIEW_ID = ti.xcom_pull(task_ids="DimAppData_"+str(today))
             data = ti.xcom_pull(task_ids='get_dim_app_'+application_id)
             application_id = get_data_after_clean[0]
+            print("_____application_id_____");
+            print(application_id);
             for data_views in VIEW_ID:
              if(data_views['nid'] == application_id):
-                print("_____Check_XCOM_data_views_____");
-                print(data_views);
+                   cursor = connection.cursor()
+                   print("_____Check_XCOM_data_views_____");
+                   print(data_views);
+                   application_id = data_views['application_id']
+                   service_type = 'test_airflow'
+                   company_name = data_views['company_name']
+                   project_name = data_views['project_name']
+                   area_m2 = data_views['area_m2']
+                   project_type = data_views['project_type']
+                   region = data_views['region']
+                   city = data_views['city']
+                   branch = data_views['branch']
+                   user_id = data_views['user_id']
+                   create_date = data_views['create_date']
+                   state = data_views['state']
+                   days = data_views['days']
+                   current_comment = data_views['current_comment']
+                   is_overdue_incomplete = data_views['is_overdue_incomplete']
+
+                   #insert Data
+                   pg_insert = "INSERT INTO dim_applications (application_id, application_number, service_name,company_name,project_title,land_area_m2,project_type,region,city,branch,developer_id,post_date,duration_days,approve_reject_flag,is_overdue_incomplete,current_comment)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                   val = (application_id, nid,service_type, company_name, project_name,area_m2,project_type,region,city,branch,user_id,create_date,days,state,is_overdue_incomplete,current_comment)
+                   cursor.execute(pg_insert, val)
+                   connection.commit()
 
 
 
