@@ -22,7 +22,6 @@ default_args = {"owner": "Etmam"}
 today = date.today()- timedelta(days=1)
 url = 'https://etmam-services.housing.gov.sa/user/dim-applications?date='+str(today)
 
-try:
 db = mysql.connect(
   host="localhost",
   user="root",
