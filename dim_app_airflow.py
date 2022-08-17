@@ -19,7 +19,7 @@ from airflow.operators.python_operator import PythonOperator
 default_args = {"owner": "Etmam"}
 
 #from datetime import datetime, time ,timedelta
-url = 'https://etmam-services.housing.gov.sa/user/dim-applications'
+url = 'https://etmam-services.housing.gov.sa/user/dim-applications?date=2017-03-29'
 
 db = mysql.connect(
   host="localhost",
@@ -31,6 +31,9 @@ db = mysql.connect(
 
 def save_values_entity(application_id ,**kwargs):
             today = date.today()- timedelta(days=1)
+            print("____________today____________")
+            print(today)
+
             get_data_after_clean = application_id.split("_")
             ti = kwargs['ti']
             VIEW_ID = ti.xcom_pull(task_ids="DimAppData_"+str(today))
