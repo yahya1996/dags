@@ -49,7 +49,7 @@ def save_values_entity(application_id ,**kwargs):
                    print(data_views);
                    application_id_full = data_views['application_id']
                    nid = data_views['nid']
-                   service_type = 'test_airflow'
+                   service_type = data_views['service_type']
                    company_name = data_views['company_name']
                    project_name = data_views['project_name']
                    area_m2 = data_views['area_m2']
