@@ -36,9 +36,14 @@ def save_values_entity(application_id ,**kwargs):
             print(today)
 
             get_data_after_clean = application_id.split("_")
+            print("_____application_id_____");
+            print(application_id);
+            print("_____get_data_after_clean_____");
+            print(get_data_after_clean);
             ti = kwargs['ti']
             VIEW_ID = ti.xcom_pull(task_ids="DimAppData_"+str(today))
             data = ti.xcom_pull(task_ids='get_dim_app_'+application_id)
+            application_id = get_data_after_clean[0]
             for data_views in VIEW_ID:
              if(data_views['nid'] == application_id):
                 print("_____Check_XCOM_data_views_____");
