@@ -28,7 +28,7 @@ url = 'https://etmam-services.housing.gov.sa/user/dim-developers?date='+str(toda
 
 db = mysql.connect(
   host="144.24.208.26",
-  user="airflow_user",
+  user="airflow_us",
   password="Yahyaayyoub1996@#$",
   port = 3306,
   database='etmam_tableau' #DB Name
