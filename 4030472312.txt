@@ -1,0 +1,132 @@
+// 20220817122523
+// https://etmam-services.housing.gov.sa/en/test-apis
+
+{
+  "CRNationalNumber": "7028916851",
+  "CRNumber": "4030472312",
+  "CRType": "Branch",
+  "CRTypeID": "1",
+  "MainCRNumber": "4030432159",
+  "CRIssueHijriDate": "14-10-1443",
+  "CRExpiryHijriDate": "14-10-1444",
+  "CrCompanyPeriod": null,
+  "CrContractId": "53731",
+  "CRCityAR": "جدة",
+  "CRCityEN": "Jeddah",
+  "CRCityCode": "4030",
+  "CRNameAR": "شركة امزون للتطوير العقاري",
+  "CRCapital": "50000",
+  "CRCapitalSpecified1": true,
+  "CRCapitalSpecified1Specified": true,
+  "CRLegalTypeAR": "ذات مسئوليةمحدودة",
+  "CRLegalTypeEN": "Limited liability",
+  "CRlegalTypeID": "204",
+  "CRStatus": "Active",
+  "CRStatusId": "0",
+  "CRStatusDate": null,
+  "CRStatusReasonAr": "السجل التجاري قائم",
+  "CRStatusReasonEN": "Active",
+  "CRPhoneNo": "0000000000",
+  "CRFaxNo": null,
+  "CRAddress": "7899 الرياض 23456-4377 1",
+  "ISICActivitiesList": [
+    {
+      "ISICCode": "681010",
+      "ISICName": "شراء وبيع الأراضي والعقارات وتقسيمها وأنشطة البيع على الخارطة"
+    },
+    {
+      "ISICCode": "681021",
+      "ISICName": "إدارة وتاجير العقارات المملوكة أو المؤجرة (سكنية )"
+    },
+    {
+      "ISICCode": "681022",
+      "ISICName": "إدارة وتاجير العقارات المملوكة او المؤجرة (غير سكنية )"
+    },
+    {
+      "ISICCode": "681024",
+      "ISICName": "إدارة وتأجير المخازن ذاتية التخزين"
+    },
+    {
+      "ISICCode": "681041",
+      "ISICName": "التطوير العقاري للمباني السكنية بأساليب البناء الحديثة\t"
+    },
+    {
+      "ISICCode": "681042",
+      "ISICName": "التطوير العقاري للمباني التجارية بأساليب البناء الحديثة\t"
+    }
+  ],
+  "CREmail": null,
+  "CRContactNo": "0536335500",
+  "FiscalDateType": {
+    "ID": null,
+    "Name": null
+  },
+  "FiscalStartDaySpecified": false,
+  "FiscalStartMonthSpecified": false,
+  "CompanyPaidCapital": null,
+  "CompanyShareCount": null,
+  "Website": null,
+  "CRNationality": "001",
+  "TransDate": "2022-05-29T00:00:00",
+  "TransDateSpecified": true,
+  "RecepDateSpecified": false,
+  "ZipCode": "23456",
+  "POBOX1": null,
+  "POBOX2": null,
+  "IseCRSpecified": false,
+  "CROwners": [
+    {
+      "OwnerName": "تركي احمد الغامدي",
+      "OwnerNationalityAR": "ســــعودى",
+      "OwnerNationalityEN": "Saudi Arabia",
+      "OwnerNationalityID": "001",
+      "RelationType": "مدير",
+      "RelationTypeID": "24",
+      "OwnerMobileNo": null,
+      "OwnerEmail": null,
+      "OwnerBirthDate": "2004-02-01T00:00:00",
+      "OwnerBirthDateSpecified": true,
+      "OwnerShareCount": null,
+      "OwnerGrossSpecified": false,
+      "OwnerID": {
+        "BorderNumber": null,
+        "PassportIdentifier": null,
+        "CRNumber": null,
+        "CRNationalNumber": null,
+        "GCCID": null,
+        "PersonIdentifier": {
+          "NationalID": "1125576148",
+          "IqamaID": null
+        },
+        "OtherIdDetails": null
+      }
+    },
+    {
+      "OwnerName": "تركي احمد علي الغامدي",
+      "OwnerNationalityAR": "ســــعودى",
+      "OwnerNationalityEN": "Saudi Arabia",
+      "OwnerNationalityID": "001",
+      "RelationType": "شــريك",
+      "RelationTypeID": "2",
+      "OwnerMobileNo": null,
+      "OwnerEmail": null,
+      "OwnerBirthDate": "2004-02-01T00:00:00",
+      "OwnerBirthDateSpecified": true,
+      "OwnerShareCount": "1",
+      "OwnerGross": 50000,
+      "OwnerGrossSpecified": true,
+      "OwnerID": {
+        "BorderNumber": null,
+        "PassportIdentifier": null,
+        "CRNumber": null,
+        "CRNationalNumber": null,
+        "GCCID": null,
+        "PersonIdentifier": {
+          "NationalID": "1125576148",
+          "IqamaID": null
+        },
+        "OtherIdDetails": null
+      }
+    }
+  ]
+}

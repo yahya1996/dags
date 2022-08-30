@@ -23,11 +23,11 @@ today = date.today()- timedelta(days=1)
 url = 'https://etmam-services.housing.gov.sa/user/dim-applications?date='+str(today)
 
 db = mysql.connect(
-  host="localhost",
-  user="root",
-  password="Gtj#pC*QDwx[8rNt",
+  host="10.0.4.2",
+  user="airflow_user",
+  password="Yahyaayyoub1996@#$",
   port = 3306,
-  database='etmam_dw_db' #DB Name
+  database='etmam_tableau' #DB Name
 )
 cursor = db.cursor()
 
