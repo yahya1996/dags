@@ -27,12 +27,13 @@ print('Date String:', date)
 url = 'https://etmam-services.housing.gov.sa/user/dim-developers?date='+str(today)
 
 db = mysql.connect(
-  host="144.24.208.26",
+  host="10.0.4.2",
   user="airflow_us",
   password="Yahyaayyoub1996@#$",
   port = 3306,
   database='etmam_tableau' #DB Name
 )
+
 cursor = db.cursor()
 
 
