@@ -19,7 +19,8 @@ from airflow.operators.python_operator import PythonOperator
 default_args = {"owner": "Etmam"}
 
 #from datetime import datetime, time ,timedelta
-#today = date.today()- timedelta(days=1)
+today = date.today()- timedelta(days=1)
+
 
 url = 'https://etmam-services.housing.gov.sa/user/dim-developers?date='+str(today)
 
