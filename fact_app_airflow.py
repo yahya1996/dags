@@ -85,7 +85,7 @@ args = {
 with DAG(
     dag_id='dim_applications',
     default_args=args,
-    start_date=datetime(2022, 8, 16),
+    start_date=datetime(2022, 9, 28),
     schedule_interval="@daily",
     tags=['Dim applications'],
 ) as dag:
