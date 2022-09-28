@@ -57,7 +57,7 @@ def save_values_entity(application_id ,**kwargs):
                 responsible_employee = dim_state['responsible_employee']
                 employee_username = dim_state['employee_username']
                 pg_insert = "INSERT INTO dim_state (nid,Application_Id,Age,Stage,old_State,sate_machine_name,Satge_complation_date,Comment,responsible_employee,employee_username)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-                val = (nid,Application_Id,Age,Stage,old_State,sate_machine_name,Satge_complation_date,Comment,responsible_employee,employee_username)
+                val = (nid,Application_Id,Age,Stage,old_State,"sate_machine_name",Satge_complation_date,Comment,responsible_employee,employee_username)
                 cursor.execute(pg_insert, val)
                 db.commit()
 
