@@ -58,7 +58,7 @@ def save_values_entity(application_id ,**kwargs):
                     state = fact_data['State']
                     dateLastState = fact_data['dateLastState']
                     pg_insert = "INSERT INTO Fact_applications (nid,application_id,service_id,service_name,region,city,created_date,current_state,final_complation_date)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-                    val = (nid ,application_id,service_type,service_name,region,city,create_date,state,dateLastState)
+                    val = (nid ,application_id,service_type,"test",region,city,create_date,state,dateLastState)
                     cursor.execute(pg_insert, val)
                     db.commit()
 
@@ -73,7 +73,7 @@ def get_Api_data_ids():
 
 
 def all_fact_app_data(options_All_data , **kwargs):
-    print("All Dim App data:")
+    print("All Fact App data:")
     print(options_All_data)
     return options_All_data
 
@@ -87,16 +87,16 @@ with DAG(
     default_args=args,
     start_date=datetime(2022, 9, 28),
     schedule_interval="@daily",
-    tags=['Dim applications'],
+    tags=['Fact App'],
 ) as dag:
     application_id = []
     options_All_data = []
     today = str(date.today() - timedelta(days=1))
     count=0
 
-    for dim_applications in get_Api_data_ids():
-            options_All_data.append(dim_applications)
-            application_id.append(dim_applications['nid']+"_"+today+"_"+str(count))
+    for fact_app in get_Api_data_ids():
+            options_All_data.append(fact_app)
+            application_id.append(fact_app['nid']+"_"+today+"_"+str(count))
             count+=1
 
 
