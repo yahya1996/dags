@@ -21,7 +21,6 @@ default_args = {"owner": "Etmam"}
 #from datetime import datetime, time ,timedelta
 today = date.today()- timedelta(days=1)
 url = 'https://etmam-services.housing.gov.sa/user/dim-applications?date='+str(today)
-
 db = mysql.connect(
    host="localhost",
   user="root",
@@ -29,6 +28,7 @@ db = mysql.connect(
   port = 3306,
   database='etmam_tableau' #DB Name
 )
+
 
 cursor = db.cursor()
 
@@ -39,41 +39,28 @@ def save_values_entity(application_id ,**kwargs):
             print(today)
             get_data_after_clean = application_id.split("_")
             ti = kwargs['ti']
-            VIEW_ID = ti.xcom_pull(task_ids="DimAppData_"+str(today))
-            data = ti.xcom_pull(task_ids='get_dim_app_'+application_id)
+            VIEW_ID = ti.xcom_pull(task_ids="FactAppData_"+str(today))
+            data = ti.xcom_pull(task_ids='get_fact_app_'+application_id)
             application_id = get_data_after_clean[0]
             print("_____application_id_____");
             print(application_id);
             for data_views in VIEW_ID:
              if(data_views['nid'] == application_id):
-                   print("_____Check_XCOM_data_views_____");
-                   print(data_views);
-                   application_id_full = data_views['application_id']
-                   nid = data_views['nid']
-                   service_type = data_views['service_type']
-                   company_name = data_views['company_name']
-                   project_name = data_views['project_name']
-                   area_m2 = data_views['area_m2']
-                   project_type = data_views['project_type']
-                   region = data_views['region']
-                   city = data_views['city']
-                   branch = data_views['branch']
-                   user_id = data_views['user_id']
-                   create_date = data_views['create_date']
-                   state = data_views['state']
-                   days = data_views['days']
-                   current_comment = data_views['current_comment']
-                   is_overdue_incomplete = data_views['is_overdue_incomplete']
-
-                   #insert Data
-                   pg_insert = "INSERT INTO dim_applications (application_id,application_number, service_name,company_name,project_title,land_area_m2,project_type,region,city,branch,developer_id,post_date,duration_days,approve_reject_flag,is_overdue_incomplete,current_comment)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-                   val = (application_id_full, nid,service_type, company_name, project_name,area_m2,project_type,region,city,branch,user_id,create_date,days,state,is_overdue_incomplete,current_comment)
-                   cursor.execute(pg_insert, val)
-                   db.commit()
-
-
-
-
+                    print("_____Check_XCOM_data_views_____");
+                    print(data_views);
+                    nid = fact_data['nid']
+                    application_id = fact_data['project_id']
+                    service_type = fact_data['type']
+                    service_name = fact_data['type_name']
+                    region = fact_data['Region']
+                    city = fact_data['City']
+                    create_date = fact_data['created_date']
+                    state = fact_data['State']
+                    dateLastState = fact_data['dateLastState']
+                    pg_insert = "INSERT INTO Fact_applications (nid,application_id,service_id,service_name,region,city,created_date,current_state,final_complation_date)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                    val = (nid ,application_id,service_type,service_name,region,city,create_date,state,dateLastState)
+                    cursor.execute(pg_insert, val)
+                    db.commit()
 
 def get_values_entity(application_id,**kwargs):
     ti = kwargs['ti']
@@ -85,7 +72,7 @@ def get_Api_data_ids():
     return data.json()
 
 
-def all_dim_app_data(options_All_data , **kwargs):
+def all_fact_app_data(options_All_data , **kwargs):
     print("All Dim App data:")
     print(options_All_data)
     return options_All_data
@@ -98,7 +85,7 @@ args = {
 with DAG(
     dag_id='dim_applications',
     default_args=args,
-    start_date=datetime(2022, 9, 28),
+    start_date=datetime(2022, 8, 16),
     schedule_interval="@daily",
     tags=['Dim applications'],
 ) as dag:
@@ -120,9 +107,9 @@ with DAG(
     end = DummyOperator(
         task_id='end')
 
-    DimAppData = PythonOperator(
-            task_id='DimAppData_'+today,
-            python_callable=all_dim_app_data,
+    FactAppData = PythonOperator(
+            task_id='FactAppData_'+today,
+            python_callable=all_fact_app_data,
             provide_context=True,
             op_kwargs={'options_All_data': options_All_data },
 
@@ -130,16 +117,16 @@ with DAG(
 
     for application_id_data in application_id:
 
-        get_dim_app = PythonOperator(
-            task_id='get_dim_app_'+application_id_data,
+        get_fact_app = PythonOperator(
+            task_id='get_fact_app_'+application_id_data,
             python_callable=get_values_entity,
             op_kwargs={'application_id': application_id_data },
             dag=dag,
         )
 
         ##task tree (perfom) and dependacy ->branches
-        save_dim_app = PythonOperator(
-                task_id='save_dim_app_'+application_id_data,
+        save_fact_app = PythonOperator(
+                task_id='save_fact_app_'+application_id_data,
                 python_callable=save_values_entity,
                 op_kwargs={'application_id': application_id_data },
                 dag=dag,
@@ -147,4 +134,4 @@ with DAG(
 
 
         ##task tree (perfom) and dependacy
-        start >> DimAppData >> get_dim_app >> save_dim_app >> end
+        start >> FactAppData >> get_fact_app >> save_fact_app >> end

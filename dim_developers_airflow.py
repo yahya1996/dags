@@ -25,9 +25,9 @@ today = date.today()- timedelta(days=1)
 url = 'https://etmam-services.housing.gov.sa/user/dim-developers?date='+str(today)
 
 db = mysql.connect(
-  host="10.0.4.2",
-  user="airflow_us",
-  password="Yahyaayyoub1996@#$",
+   host="localhost",
+  user="root",
+  password="Gtj#pC*QDwx[8rNt",
   port = 3306,
   database='etmam_tableau' #DB Name
 )
@@ -95,7 +95,7 @@ args = {
 with DAG(
     dag_id='dim_developers',
     default_args=args,
-    start_date=datetime(2022, 8, 16),
+    start_date=datetime(2022, 9, 28),
     schedule_interval="@daily",
     tags=['Dim Developers'],
 ) as dag:
