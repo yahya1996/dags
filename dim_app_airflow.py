@@ -96,7 +96,7 @@ args = {
 }
 
 with DAG(
-    dag_id='dim_applications',
+    dag_id='fact_app',
     default_args=args,
     start_date=datetime(2022, 9, 28),
     schedule_interval="@daily",
