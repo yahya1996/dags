@@ -58,7 +58,7 @@ def save_values_entity(application_id ,**kwargs):
                     state = fact_data['State']
                     dateLastState = fact_data['dateLastState']
                     pg_insert = "INSERT INTO Fact_applications (nid,application_id,service_id,service_name,region,city,created_date,current_state,final_complation_date)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-                    val = (nid ,application_id,service_type,"test",region,city,create_date,state,dateLastState)
+                    val = (nid ,application_id,service_type,service_name,region,city,create_date,state,dateLastState)
                     cursor.execute(pg_insert, val)
                     db.commit()
 
