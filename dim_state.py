@@ -45,7 +45,7 @@ def save_values_entity(application_id ,**kwargs):
             print("_____application_id_____");
             print(application_id);
             for dim_state in VIEW_ID:
-             if(dim_state['nid'] == application_id):
+             if(dim_state['ID'] == application_id):
                 nid = dim_state['ID']
                 Application_Id = dim_state['Application_Id']
                 Age = dim_state['Age']
@@ -97,7 +97,7 @@ with DAG(
 
     for fact_app in get_Api_data_ids():
             options_All_data.append(fact_app)
-            application_id.append(fact_app['nid']+"_"+today+"_"+str(count))
+            application_id.append(fact_app['ID']+"_"+today+"_"+str(count))
             count+=1
 
 
