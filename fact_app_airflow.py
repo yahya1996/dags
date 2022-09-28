@@ -44,10 +44,10 @@ def save_values_entity(application_id ,**kwargs):
             application_id = get_data_after_clean[0]
             print("_____application_id_____");
             print(application_id);
-            for data_views in VIEW_ID:
-             if(data_views['nid'] == application_id):
-                    print("_____Check_XCOM_data_views_____");
-                    print(data_views);
+            for fact_data in VIEW_ID:
+             if(fact_data['nid'] == application_id):
+                    print("_____Check_XCOM_fact_data_____");
+                    print(fact_data);
                     nid = fact_data['nid']
                     application_id = fact_data['project_id']
                     service_type = fact_data['type']
