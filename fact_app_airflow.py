@@ -46,21 +46,25 @@ def save_values_entity(application_id ,**kwargs):
             print(application_id);
             for fact_data in VIEW_ID:
              if(fact_data['nid'] == application_id):
-                    print("_____Check_XCOM_fact_data_____");
-                    print(fact_data);
-                    nid = fact_data['nid']
-                    application_id = fact_data['project_id']
-                    service_type = fact_data['type']
-                    service_name = fact_data['type_name']
-                    region = fact_data['Region']
-                    city = fact_data['City']
-                    create_date = fact_data['created_date']
-                    state = fact_data['State']
-                    dateLastState = fact_data['dateLastState']
-                    pg_insert = "INSERT INTO Fact_applications (nid,application_id,service_id,service_name,region,city,created_date,current_state,final_complation_date)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-                    val = (nid ,application_id,service_type,service_name,region,city,create_date,state,dateLastState)
-                    cursor.execute(pg_insert, val)
-                    db.commit()
+                         print("_____Check_XCOM_fact_data_____");
+                         print(fact_data);
+                         nid = fact_data['nid']
+                         application_id = fact_data['project_id']
+                         service_type = fact_data['type']
+                         service_name = fact_data['type_name']
+                         region = fact_data['Region']
+                         city = fact_data['City']
+                         create_date = fact_data['created_date']
+                         state = fact_data['State']
+                         dateLastState = fact_data['dateLastState']
+                         cr_number = fact_data['field_cr_number']
+                         dateLastState = fact_data['dateLastState']
+                         branch  = fact_data['field_etmam_center_content']
+                         Company = fact_data['field_cr_name_ar']
+                         pg_insert = "INSERT INTO Fact_applications (cr_number,branch,Company,nid,application_id,service_id,service_name,region,city,created_date,current_state,final_complation_date)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                         val = (cr_number,branch,Company,nid ,application_id,service_type,service_name,region,city,create_date,state,dateLastState)
+                         cursor.execute(pg_insert, val)
+                         db.commit()
 
 def get_values_entity(application_id,**kwargs):
     ti = kwargs['ti']
